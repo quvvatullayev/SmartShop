@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.category }}{% endblock %}
+
+{% block content %}
+    <h1>{{ product.first }}</h1>
+    <hr class="dropdown-divider">
+    
+    <div class="container card-group mt-5">
+        
+        {% for i in product %}
+                <div class="me-5 mb-5" style="width: 18rem;">
+                    <img src="http://127.0.0.1:8000{{ i.img }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ i.title }}</h5>
+                    <p class="card-text">{{ i.description }}</p>
+                {% if i.quantity %}
+                    <p class="card-text text-success">We have {{ i.quantity }} this products now</p>
+                    <a href="#" class="btn btn-primary">add card</a>
+                {% else %}
+                    <p class="card-text text-danger">We don't have this product now</p>
+                    <a href="#" class="btn btn-primary disabled">add card</a>
+                {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}
