@@ -1,6 +1,7 @@
 from rest_framework import generics
 from rest_framework.response import Response
 from ..serializers import Category, CategorySerializer
+from ..serializers import Product, ProductSerializer
 from django.shortcuts import render
 
 class ListCreateView(generics.ListCreateAPIView):
@@ -11,8 +12,11 @@ class ListCreateView(generics.ListCreateAPIView):
         category_bojs = Category.objects.all()
         categorys = CategorySerializer(category_bojs, many = True)
 
+        product_objs = Product.objects.all()
+        product = ProductSerializer(product_objs, many = True)
+
         return render(
             request=request, 
             template_name='home.html', 
-            context={'category':categorys.data}
+            context={'category':categorys.data, 'product':product.data}
             )

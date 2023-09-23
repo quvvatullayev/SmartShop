@@ -14,7 +14,7 @@ class Product(models.Model):
     
     title = models.CharField(max_length=120)
     description = models.TextField()
-    img = models.ImageField(upload_to='../product_imgs')
+    img = models.ImageField(upload_to='product_imgs')
     quantity = models.PositiveIntegerField(default=0)
 
     class Meta:
