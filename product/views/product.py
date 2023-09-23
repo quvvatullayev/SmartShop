@@ -24,3 +24,16 @@ class ProductListCreateView(generics.ListCreateAPIView):
             template_name='category.html', 
             context={'product':product.data}
             )
+    
+class ProductListView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+    def list(self, request):
+        product_objs = Product.objects.all()
+        product = ProductSerializer(product_objs, many = True)
+        return render(
+            request=request, 
+            template_name='category.html', 
+            context={'product':product.data}
+            )
