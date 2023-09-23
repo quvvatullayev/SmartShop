@@ -19,10 +19,13 @@ class ProductListCreateView(generics.ListCreateAPIView):
         category_objs = Category.objects.all()
         categorys = CategorySerializer(category_objs, many = True)
 
+        data_obj = Category.objects.get(id = pk)
+        data = CategorySerializer(data_obj, many = False)
+
         return render(
             request=request, 
             template_name='category.html', 
-            context={'product':product.data}
+            context={'product':product.data, 'category':categorys.data, 'data':data.data}
             )
     
 class ProductListView(generics.ListAPIView):
@@ -32,8 +35,11 @@ class ProductListView(generics.ListAPIView):
     def list(self, request):
         product_objs = Product.objects.all()
         product = ProductSerializer(product_objs, many = True)
+
+        category_objs = Category.objects.all()
+        categorys = CategorySerializer(category_objs, many = True)
         return render(
             request=request, 
-            template_name='category.html', 
-            context={'product':product.data}
+            template_name='products.html', 
+            context={'product':product.data, 'category':categorys.data}
             )

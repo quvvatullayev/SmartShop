@@ -2,6 +2,8 @@ from django.db import models
 
 class Category(models.Model):
     title = models.CharField(max_length=120)
+    description = models.TextField()
+    img = models.ImageField(upload_to='category_imgs')
     
     class Meta:
         ordering = ['-id']
