@@ -13,16 +13,20 @@
                                 <div class="carousel-item active">
                                     <img src="{{ i.img }}" class="d-block w-100" style="height: 500px;" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h5>{{ i.title }}</h5>
-                                        <p>{{ i.description }}</p>
+                                        <a href="{% url 'product:category_by_product' i.id %}" style="color: white; font-family: 'Courier New', Courier, monospace;">
+                                            <h5>{{ i.title }}</h5>
+                                            <p>{{ i.description }}</p>
+                                        </a>
                                       </div>
                                 </div>
                             {% else %}
                                 <div class="carousel-item">
-                                    <img src="{{ i.img }}" class="d-block w-100" style="height: 500px;" alt="...">
+                                    <img src="{{ i.img }}" class="d-block w-100" style="height: 500px; font-family: 'Courier New', Courier, monospace;" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h5>{{ i.title }}</h5>
-                                        <p>{{ i.description }}</p>
+                                        <a href="{% url 'product:category_by_product' i.id %}" style="color: white;">
+                                            <h5>{{ i.title }}</h5>
+                                            <p>{{ i.description }}</p>
+                                        </a>
                                       </div>
                                 </div>
                             {% endif %}
