@@ -15,8 +15,11 @@ class ListCreateView(generics.ListCreateAPIView):
         product_objs = Product.objects.all()
         product = ProductSerializer(product_objs, many = True)
 
+        data_boj = Category.objects.first()
+        data = CategorySerializer(data_boj).data
+
         return render(
-            request=request, 
+            request=request,
             template_name='home.html', 
-            context={'category':categorys.data, 'product':product.data}
+            context={'category':categorys.data, 'product':product.data, 'data':data}
             )
