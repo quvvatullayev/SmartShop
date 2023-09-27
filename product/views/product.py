@@ -43,3 +43,27 @@ class ProductListView(generics.ListAPIView):
             template_name='products.html', 
             context={'product':product.data, 'category':categorys.data}
             )
+    
+class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer()
+
+    def retrieve(self, request, *args, **kwargs):
+        product_obj = Product.objects.get(id = kwargs['pk'])
+        product = ProductSerializer(product_obj, many = False)
+
+        product_objs = Product.objects.filter(category = product_obj.category)
+        products = ProductSerializer(product_objs, many = True)
+
+        category_objs = Category.objects.all()
+        categorys = CategorySerializer(category_objs, many = True)
+
+        return render(
+            request=request,
+            template_name='product.html',
+            context={
+                'product':product.data,
+                'products':products.data,
+                'category':categorys.data,
+            }
+            )

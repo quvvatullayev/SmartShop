@@ -1,31 +1,33 @@
 {% extends "base.html" %}
 
-{% block title %}{{ product.category }}{% endblock %}
+{% block title %}{{ product.title }}{% endblock %}
 
 {% block content %}
     <center>
         <div class="card mb-3 mt-1" style="width: 100%; height: 100%;">
             <div class="row g-0">
-            <div class="col-md-6">
-                <img src="http://127.0.0.1:8000{{data.img}}" style="height: 100%; width: 100%;" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-5">
-                <div class="card-body">
-                <h3 class="card-title">{{data.title}}</h3>
-                <p class="card-text">{{data.description}}</p>
-                <p class="card-text"><small class="text-muted">Created {{ data.created }} ago</small></p>
-                <p class="card-text"><small class="text-muted">Last updated {{ data.updeted }} ago</small></p>
+                <div class="col-md-4 col-md-6">
+                    <img src="http://127.0.0.1:8000{{ product.img }}" style="height: 100%; width: 100%;" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text text-success">We have {{ product.quantity }} this products now</p>
+                    <p class="card-text"><small class="text-muted">Created {{ product.created }} ago</small></p>
+                    <p class="card-text"><small class="text-muted">Last updated {{ product.updeted }} ago</small></p>
+                    </div>
+                </div>
                 </div>
             </div>
-            </div>
-        </div>
     </center>
-    <h1>Category is {{data.title}}</h1>
+
+    <h1>Product</h1>
     <hr class="dropdown-divider">
     
     <div class="container card-group mt-5">
         
-        {% for i in product %}
+        {% for i in products %}
                 <div class="me-5 mb-5" style="width: 18rem;">
                     <img src="http://127.0.0.1:8000{{ i.img }}" class="card-img-top" alt="...">
                     <div class="card-body">
