@@ -56,6 +56,9 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li><a class="dropdown-item" href="#">Logout</a></li>
                       <li><a class="dropdown-item" href="#">My accout</a></li>
+                      {% if request.user.is_staff %}
+                        <li><a class="dropdown-item" href="{% url 'user:adminview' %}">Admin view</a></li>
+                      {% endif %}
                     </ul>
                   </li>
                 </ul>
