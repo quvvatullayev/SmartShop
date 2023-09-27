@@ -2,6 +2,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 from ..serializers import Category, CategorySerializer
 from ..serializers import Product, ProductSerializer
+from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 from django.shortcuts import render
 
 class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
@@ -31,6 +32,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
 class ProductListView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsAdminUser | IsAuthenticatedOrReadOnly]
 
     def list(self, request):
         product_objs = Product.objects.all()
@@ -47,6 +49,7 @@ class ProductListView(generics.ListAPIView):
 class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer()
+    permission_classes = [IsAdminUser | IsAuthenticatedOrReadOnly]
 
     def retrieve(self, request, *args, **kwargs):
         product_obj = Product.objects.get(id = kwargs['pk'])
