@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No close</button>
-                                    <form action="{% url 'product:product' i.id %}" method="delete">
+                                    <form method="delete" action="{% url 'product:product' i.id %}">
                                         <button type="submit" class="btn btn-danger">Yes delete</button>
                                     </form>
                                     </div>
