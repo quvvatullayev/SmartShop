@@ -5,20 +5,19 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.request import Request
 from django.shortcuts import render
+from product.serializers import Category, CategorySerializer
 
 class LoginHtmlView(APIView):
-    def post(self, request:Request):
-        print('hi')
-        return render(request=request, template_name='user/login.html', context={'user':{}})
-
-class LoginView(APIView):
-    def post(self, request:Request):
+    def get(self, request:Request):
         user = request.user
-        login(user=user, request=request)
-        return Response({})
+        print('hi')
+        category_objs = Category.objects.all()
+        categorys = CategorySerializer(category_objs, many = True)
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def custom_logout(request):
-    logout(request)
-    return Response({'detail': 'Successfully logged out'})
+        return render(
+            request=request, 
+            template_name='user/login.html', 
+            context={
+                'category':categorys.data
+                }
+            )

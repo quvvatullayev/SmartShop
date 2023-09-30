@@ -3,14 +3,30 @@
  {% block title %} login {% endblock %}
 
  {% block content %}
-  <form method="post" action="{% url 'user:custom_login' %}">
+ <div class="container">
+  <form method="post" class="row m-5" action="http://127.0.0.1:8000/dj-rest-auth/login/">
     {% csrf_token %}
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br>
+    <div class="col-12">
+      <label class="form-label" for="username">Username:</label>
+      <input class="form-control" type="text" id="username" name="username" required><br>
+    </div>
+    
+    <div class="col-12">
+      <label class="form-label" for="emil">Emil:</label>
+      <input class="form-control" type="emil" id="emil" name="emil" required><br>
+    </div>
+    
+    <div class="col-12">
+      <label class="form-label" for="password">Password:</label>
+      <input class="form-control" type="password" id="password" name="password" required><br>
+    </div>
 
-    <button type="submit">Login</button>
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit">Login</button>
+    </div>
+
   </form>
+ </div>
+  
  {% endblock %}

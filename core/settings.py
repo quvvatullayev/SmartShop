@@ -155,5 +155,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'HighlightPage_Project/media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL =  'product:categorys'
-LOGOUT_REDIRECT_URL = 'product:categorys'
+LOGOUTED_REDIRECT_URL = 'product:categorys'
 SINUP_REDIRECT_URL = 'product:categorys'

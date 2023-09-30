@@ -54,10 +54,12 @@
                       {{ request.user.username }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="http://127.0.0.1:8000/auth/logout/">Logout</a></li>
+                      <form action="http://127.0.0.1:8000/dj-rest-auth/login/" method="post">
+                        <li><a class="dropdown-item" type="submit" href="http://127.0.0.1:8000/dj-rest-auth/logout/">Logout</a></li>
+                      </form>
                       <li><a class="dropdown-item" href="#">My accout</a></li>
                       {% if request.user.is_staff %}
-                        <li><a class="dropdown-item" href="{% url 'user:adminview' %}">Admin view</a></li>
+                        {% comment %} <li><a class="dropdown-item" href="{% url 'user:adminview' %}">Admin view</a></li> {% endcomment %}
                       {% endif %}
                     </ul>
                   </li>
