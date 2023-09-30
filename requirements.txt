@@ -3,3 +3,5 @@ djangorestframework
 django-cors-headers
 Pillow
 drf-yasg
+dj-rest-auth
+django-allauth
