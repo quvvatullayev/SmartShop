@@ -56,6 +56,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
+}
+
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
@@ -133,3 +139,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL =  'product:categorys'
 LOGOUT_REDIRECT_URL = 'product:categorys'
+SINUP_REDIRECT_URL = 'product:categorys'

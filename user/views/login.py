@@ -1,29 +1,24 @@
+from django.contrib.auth import login, logout
+from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.request import Request
-from rest_framework.response import Response
-from django.contrib.auth.models import User
-from ..serializers import UserSerializers
-from rest_framework import generics
 from django.shortcuts import render
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.authtoken.models import Token
+
+class LoginHtmlView(APIView):
+    def post(self, request:Request):
+        print('hi')
+        return render(request=request, template_name='user/login.html', context={'user':{}})
 
 class LoginView(APIView):
-    permission_classes = [IsAuthenticated]
-    def get(self, request:Request):
+    def post(self, request:Request):
+        user = request.user
+        login(user=user, request=request)
+        return Response({})
 
-        return render(request=request, template_name='user/login.html', context={})
-    
-class CreateUserView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializers
-
-    def create(self, request:Request, *args, **kwargs):
-        serializer = UserSerializers(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            user = User.objects.get(id = serializer.data['id'])
-            token = Token.objects.create(user = user)
-            return Response({'token':token.key})
-        return Response({"errors":serializer.errors})
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def custom_logout(request):
+    logout(request)
+    return Response({'detail': 'Successfully logged out'})
