@@ -4,10 +4,14 @@ from ..serializers import Category, CategorySerializer
 from ..serializers import Product, ProductSerializer
 from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 from django.shortcuts import render
+from rest_framework import filters
+
 
 class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'description']
 
 class ProductListCreateView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
@@ -33,6 +37,8 @@ class ProductListView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [IsAdminUser | IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'description']
 
     def list(self, request):
         product_objs = Product.objects.all()
@@ -50,6 +56,8 @@ class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer()
     permission_classes = [IsAdminUser | IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'description']
 
     def retrieve(self, request, *args, **kwargs):
         product_obj = Product.objects.get(id = kwargs['pk'])
