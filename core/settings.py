@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "allauth",
     'allauth.account',
     "corsheaders",
+    "drf_yasg",
     # 'allauth.socialaccount',
 
     # local apps

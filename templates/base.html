@@ -54,9 +54,13 @@
                       {{ request.user.username }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <form action="http://127.0.0.1:8000/dj-rest-auth/login/" method="post">
-                        <li><a class="dropdown-item" type="submit" href="http://127.0.0.1:8000/dj-rest-auth/logout/">Logout</a></li>
+
+                      <!-- login -->
+                      <form action="http://127.0.0.1:8000/dj-rest-auth/logout/" method="get">
+                        {% csrf_token %}
+                        <li><button type="submit" class="dropdown-item">Logout</button></li>
                       </form>
+
                       <li><a class="dropdown-item" href="#">My accout</a></li>
                       {% if request.user.is_staff %}
                         {% comment %} <li><a class="dropdown-item" href="{% url 'user:adminview' %}">Admin view</a></li> {% endcomment %}
@@ -73,8 +77,19 @@
                     None user
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Login</a></li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+
+                     <!-- login -->
+                     <form action="http://127.0.0.1:8000/dj-rest-auth/login/" method="post">
+                      {% csrf_token %}
+                      <li><button type="submit" class="dropdown-item">Logout</button></li>
+                    </form>
+                    
+                    <!-- logout -->
+                    <form action="http://127.0.0.1:8000/dj-rest-auth/logout/" method="post">
+                      {% csrf_token %}
+                      <li><button type="submit" class="dropdown-item">Logout</button></li>
+                    </form>
+
                     <li><a class="dropdown-item" href="#">Register</a></li>
                   </ul>
                 </li>
